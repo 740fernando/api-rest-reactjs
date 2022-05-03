@@ -16,12 +16,13 @@ public class MathController {
 		return convertToDouble(numberOne)+convertToDouble(numberTwo);
 	}
 
-	private double convertToDouble(String numberOne) {
-		return Double.parseDouble(numberOne);
+	private Double convertToDouble(String strNumber) {
+		return (isNumeric(strNumber)) ?Double.parseDouble(strNumber) :0D;
 	}
 
-	private boolean isNumeric(String number) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean isNumeric(String strNumber) {
+		if(strNumber.equals(null)) return false;
+		String number  = strNumber.replaceAll(",",".");
+		return number.matches("[-+]?[0-9]*\\\\.?[0-9]+");
 	}
 }
