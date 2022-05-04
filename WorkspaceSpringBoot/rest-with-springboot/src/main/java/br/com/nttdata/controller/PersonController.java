@@ -17,7 +17,7 @@ import br.com.nttdata.data.vo.PersonVO;
 import br.com.nttdata.service.PersonService;
 
 @RestController
-@RequestMapping(value="/PersonVO")
+@RequestMapping(value="/person")
 public class PersonController {
 	
 	@Autowired
