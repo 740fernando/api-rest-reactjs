@@ -44,6 +44,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		
+		<!-- Simplifica o processo de Bind de um objeto  -->
+		<dependency>
+			<groupId>com.github.dozermapper</groupId>
+			<artifactId>dozer-core</artifactId>
+			<version>6.4.1</version>
+		</dependency>
+		
 		<!-- Resp por testes automatizados  -->
 		<dependency>
 			<groupId>junit</groupId>
