@@ -30,6 +30,22 @@ public class PersonServiceImpl implements PersonService {
 		return mockPerson();
 	}
 
+	@Override
+	public Person create(Person person) {
+		return person;
+	}
+	
+	@Override
+	public Person update(Person person) {
+		return person;
+	}
+	
+	@Override
+	public void delete(String id) {
+		findById(id);
+	}
+	
+	
 	private List<Person> mockPerson() {
 		List<Person> listMockPerson = new ArrayList<>();
 		for (int i = 0; i < 8; i++) {
@@ -44,8 +60,11 @@ public class PersonServiceImpl implements PersonService {
 		}
 		return listMockPerson;
 	}
+	
 
 	private String randomGender(Long id) {
 		return (id.intValue()%2 == 0) ? "Female" : "Male";
 	}
+
+
 }
