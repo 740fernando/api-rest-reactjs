@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.nttdata.converter.DozerConverter;
+import br.com.nttdata.data.vo.PersonVO;
 import br.com.nttdata.exception.ResourceNotFoundException;
 import br.com.nttdata.model.Person;
 import br.com.nttdata.repository.PersonRepository;
@@ -17,24 +19,24 @@ public class PersonServiceImpl implements PersonService {
 	private PersonRepository repository;
 
 	@Override
-	public Person findById(Long id) {
-		return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+	public PersonVO findById(Long id) {
+		return DozerConverter.parseObject(repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID")),PersonVO.class);
 	}
 
 	@Override
-	public List<Person> findAll() {
-		return repository.findAll();
+	public List<PersonVO> findAll() {
+		return DozerConverter.parseListObjects(repository.findAll(),PersonVO.class);
 	}
 
 	@Override
-	public Person create(Person person) {
-		return repository.save(person);
+	public PersonVO create(PersonVO person) {
+		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
 	}
 	
 	@Override
-	public Person update(Person person) {
+	public PersonVO update(PersonVO person) {
 		findById(person.getId());
-		return repository.save(person);
+		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
 	}
 	
 	@Override
