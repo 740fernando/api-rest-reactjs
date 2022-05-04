@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nttdata.data.vo.PersonVO;
+import br.com.nttdata.data.vo.PersonVOV2;
 import br.com.nttdata.service.PersonService;
 
 @RestController
@@ -34,12 +35,18 @@ public class PersonController {
 	}
 	
 	@PostMapping("/create")
-	public PersonVO create(@RequestBody PersonVO PersonVO) {
-		return service.create(PersonVO);
+	public PersonVO create(@RequestBody PersonVO person) {
+		return service.create(person);
 	}
+	
+	@PostMapping("/v2/create")
+	public PersonVOV2 createV2(@RequestBody PersonVOV2 personV2) {
+		return service.createV2(personV2);
+	}
+	
 	@PutMapping("/update")
-	public PersonVO update(@RequestBody PersonVO PersonVO) {
-		return service.update(PersonVO);
+	public PersonVO update(@RequestBody PersonVO person) {
+		return service.update(person);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
