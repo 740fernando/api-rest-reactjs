@@ -17,8 +17,8 @@ public class PersonServiceImpl implements PersonService {
 	private PersonRepository repository;
 
 	@Override
-	public Person findById(String id) {
-		return repository.findById(Long.parseLong(id)).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+	public Person findById(Long id) {
+		return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
 	}
 
 	@Override
@@ -33,12 +33,12 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public Person update(Person person) {
-		findById(person.getId().toString());
+		findById(person.getId());
 		return repository.save(person);
 	}
 	
 	@Override
-	public void delete(String id) {
-		repository.deleteById(findById(id.toString()).getId());
+	public void delete(Long id) {
+		repository.deleteById(findById(id).getId());
 	}
 }
