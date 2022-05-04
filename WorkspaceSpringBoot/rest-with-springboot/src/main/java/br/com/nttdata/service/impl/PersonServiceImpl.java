@@ -1,72 +1,44 @@
 package br.com.nttdata.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.nttdata.exception.ResourceNotFoundException;
 import br.com.nttdata.model.Person;
 import br.com.nttdata.repository.PersonRepository;
 import br.com.nttdata.service.PersonService;
 
 @Service
 public class PersonServiceImpl implements PersonService {
-
-	private final AtomicLong counter = new AtomicLong();
+	
+	@Autowired
+	private PersonRepository repository;
 
 	@Override
 	public Person findById(String id) {
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("Lauren");
-		person.setLastName("Ribeiro de Souza Vieira");
-		person.setAddress("R. Jair Ballo - Maua - Brasil");
-		person.setGender("female");
-		return person;
+		return repository.findById(Long.parseLong(id)).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
 	}
 
 	@Override
 	public List<Person> findAll() {
-		return mockPerson();
+		return repository.findAll();
 	}
 
 	@Override
 	public Person create(Person person) {
-		return person;
+		return repository.save(person);
 	}
 	
 	@Override
 	public Person update(Person person) {
-		return person;
+		findById(person.getId().toString());
+		return repository.save(person);
 	}
 	
 	@Override
 	public void delete(String id) {
-		findById(id);
+		repository.deleteById(findById(id.toString()).getId());
 	}
-	
-	
-	private List<Person> mockPerson() {
-		List<Person> listMockPerson = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
-			Person mockPerson = new Person();			
-			mockPerson.setId(counter.incrementAndGet());
-			mockPerson.setFirstName("First Name ".concat(String.valueOf(i)));
-			mockPerson.setLastName("Last Name".concat(String.valueOf(i)));
-			mockPerson.setAddress("Address : ".concat(String.valueOf(i)));
-			mockPerson.setGender("Gender : ".concat(randomGender(mockPerson.getId())));
-			
-			listMockPerson.add(mockPerson);
-		}
-		return listMockPerson;
-	}
-	
-
-	private String randomGender(Long id) {
-		return (id.intValue()%2 == 0) ? "Female" : "Male";
-	}
-
-
 }
