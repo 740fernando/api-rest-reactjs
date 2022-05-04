@@ -2,13 +2,13 @@ package br.com.nttdata.service;
 
 import java.util.List;
 
-import br.com.nttdata.model.PersonVO;
+import br.com.nttdata.model.Person;
 
 public interface PersonService {
 	
-	PersonVO findById(Long id);
-	List<PersonVO> findAll();
-	PersonVO create(PersonVO person);
-	PersonVO update(PersonVO person);
+	Person findById(Long id);
+	List<Person> findAll();
+	Person create(Person person);
+	Person update(Person person);
 	void delete(Long id);
 }

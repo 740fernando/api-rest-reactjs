@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.nttdata.model.PersonVO;
+import br.com.nttdata.data.vo.PersonVO;
 import br.com.nttdata.service.PersonService;
 
 @RestController
-@RequestMapping(value="/person")
+@RequestMapping(value="/PersonVO")
 public class PersonController {
 	
 	@Autowired
@@ -34,12 +34,12 @@ public class PersonController {
 	}
 	
 	@PostMapping("/create")
-	public PersonVO create(@RequestBody PersonVO person) {
-		return service.create(person);
+	public PersonVO create(@RequestBody PersonVO PersonVO) {
+		return service.create(PersonVO);
 	}
 	@PutMapping("/update")
-	public PersonVO update(@RequestBody PersonVO person) {
-		return service.update(person);
+	public PersonVO update(@RequestBody PersonVO PersonVO) {
+		return service.update(PersonVO);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
