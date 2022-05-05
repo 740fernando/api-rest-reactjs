@@ -7,20 +7,21 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.3.RELEASE</version>
 	</parent>
-	<groupId>br.com.erudio</groupId>
+	<groupId>br.com.nttdata</groupId>
 	<artifactId>rest-with-springboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<properties>
-		<!-- Encoding especificado como UTF-8 para geração de relatorios e compilação do codigo  -->
+		<!-- Encoding especificado como UTF-8 para geração de relatorios e compilação 
+			do codigo -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
-		<!-- spring data e dependencias para trabalhar com rest   -->
+		<!-- spring data e dependencias para trabalhar com rest -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
@@ -31,45 +32,71 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Permite trabalhar com hibernate -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
-		<!--  Permite realizar a comunicação entre app e o bd obs - nao foi colocado versao, pq esta herdando do parent -->
+
+		<!-- Permite realizar a comunicação entre app e o bd obs - nao foi colocado 
+			versao, pq esta herdando do parent -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
+
 		<!-- Permite o versionamento do bd -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-		
-		<!-- Simplifica o processo de Bind de um objeto  -->
+
+		<!-- Simplifica o processo de Bind de um objeto -->
 		<dependency>
 			<groupId>com.github.dozermapper</groupId>
 			<artifactId>dozer-core</artifactId>
 			<version>6.4.1</version>
 		</dependency>
-		
-		<!-- Resp por testes automatizados  -->
+
+		<!-- Resp por testes automatizados -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-	
-	<!-- Plugin do spring boot para compilar e ajustar corretamente  -->
+
+
 	<build>
 		<plugins>
+			<!-- Plugin do spring boot para compilar e ajustar corretamente -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- Permite executar o flyway sem precisar subir o spring -->
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<configuration>
+					<url>jdbc:mysql://localhost:3306/rest_with_spring_boot?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>
+					<user>root</user>
+					<password>root</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+						<exclusions>
+							<exclusion>
+								<artifactId>slf4j-api</artifactId>
+								<groupId>org.slf4j</groupId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
