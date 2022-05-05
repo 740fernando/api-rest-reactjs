@@ -1,7 +1,8 @@
-INSERT INTO `person` (`id`, `address`, `first_name`, `gender`, `last_name`) VALUES
-	(1, 'Uberlândia - Minas Gerais - Brasil', 'Leandro', 'Male', 'Costa'),
-	(2, 'Uberlândia - Minas Gerais - Brasil', 'Gabriela', 'Female', 'Costa'),
-	(5, 'Patos de Minas - Minas Gerais - Brasil', 'Flávio', 'Male', 'Costa'),
-	(7, 'Uberlândia - Minas Gerais - Brasil', 'Fernanda', 'Female', 'Cardoso da Silva'),
-	(8, 'Patos de Minas - Minas Gerais - Brasil', 'Pedro', 'Male', 'Paulo'),
-	(9, 'Patos de Minas - Minas Gerais - Brasil', 'Marcos', 'Male', 'Paulo');
+INSERT INTO rest_with_spring_boot.person (address,first_name,gender,last_name) VALUES
+	 ('Maua - Brasil','Lauren','female','Ribeiro de Souza'),
+	 ('Sao Paulo - Brasil','Fernando','Male','Luiz de Souza Vieira'),
+	 ('R. Jair Ballo - Maua - Brasil','Lauren','female','Ribeiro de Souza Vieira'),
+	 ('Sao Paulo - Brasil','Gabriel','Male','Luiz de Souza Vieira'),
+	 ('R. Jair Ballo - Maua - Brasil','Lauren','female','Ribeiro de Souza Vieira'),
+	 ('R. Jair Ballo - Maua - Brasil','Nanda','female','Ribeiro de Souza Vieira'),
+	 ('R. Jair Ballo - Maua - Brasil','Nanda','female','Ribeiro de Souza Vieira');
