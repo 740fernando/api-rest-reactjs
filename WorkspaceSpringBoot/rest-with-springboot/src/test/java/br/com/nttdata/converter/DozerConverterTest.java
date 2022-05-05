@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nttdata.converter.mocks.MockPerson;
-import br.com.nttdata.data.vo.PersonVO;
+import br.com.nttdata.data.vo.v1.PersonVO;
 
 public class DozerConverterTest {
 	
