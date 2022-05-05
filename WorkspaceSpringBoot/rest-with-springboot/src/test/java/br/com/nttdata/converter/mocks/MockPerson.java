@@ -53,7 +53,7 @@ public class MockPerson {
 		person.setAddress(ADDRES_TEST.concat(number.toString()));
 		person.setFirstName(FIRST_NAME_TEST.concat(number.toString()));
 		person.setGender(((number%2) == 0)? MALE :FEMALE);
-		person.setId(number.longValue());
+		person.setKey(number.longValue());
 		person.setLastName(LAST_NAME_TEST.concat(number.toString()));
 		return person;
 	}

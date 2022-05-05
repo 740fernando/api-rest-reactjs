@@ -33,10 +33,16 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Permite trabalhar com hibernate -->
+		<!-- for JPA support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<!-- for HATEOAS support -->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
 		</dependency>
 
 		<!-- Permite realizar a comunicação entre app e o bd obs - nao foi colocado 

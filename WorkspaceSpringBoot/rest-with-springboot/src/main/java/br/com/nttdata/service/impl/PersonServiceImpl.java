@@ -35,13 +35,13 @@ public class PersonServiceImpl implements PersonService {
 		
 	@Override
 	public PersonVO update(PersonVO person) {
-		findById(person.getId());
+		findById(person.getKey());
 		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
 	}
 	
 	@Override
 	public void delete(Long id) {
-		repository.deleteById(findById(id).getId());
+		repository.deleteById(findById(id).getKey());
 	}
 
 
