@@ -58,11 +58,17 @@
 			<artifactId>dozer-core</artifactId>
 			<version>6.4.1</version>
 		</dependency>
-		
+
 		<!-- Suporte a serialização de xml -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+		<!-- Suporte a serialização de yaml - Vantagem : Ocupa menos espaco, melhor processamento -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 
 		<!-- Resp por testes automatizados -->
