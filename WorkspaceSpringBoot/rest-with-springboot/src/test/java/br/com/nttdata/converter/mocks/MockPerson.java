@@ -3,7 +3,7 @@ package br.com.nttdata.converter.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.nttdata.data.vo.PersonVO;
+import br.com.nttdata.data.vo.v1.PersonVO;
 import br.com.nttdata.model.Person;
 
 public class MockPerson {
