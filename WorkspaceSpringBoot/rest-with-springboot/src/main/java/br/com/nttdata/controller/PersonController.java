@@ -1,5 +1,8 @@
 package br.com.nttdata.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,37 +20,46 @@ import br.com.nttdata.data.vo.v1.PersonVO;
 import br.com.nttdata.service.PersonService;
 
 @RestController
-@RequestMapping(value="/api/person/v1")
+@RequestMapping(value = "/api/person/v1")
 public class PersonController {
-	
+
 	@Autowired
 	private PersonService service;
-	
-	@GetMapping(produces = {"application/json","application/xml"})
-	public List<PersonVO> findAll(){
-		return service.findAll();
-	}
-	
-	@GetMapping(value = "/{id}",produces = {"application/json","application/xml"})
-	public PersonVO findById(@PathVariable("id") Long id) {
-		return service.findById(id);
-	}
-	
-	@PostMapping(value = "/create",consumes = {"application/json","application/xml"},
-			produces = {"application/json","application/xml"})
-	public PersonVO create(@RequestBody PersonVO person) {
-		return service.create(person);
+
+	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
+	public List<PersonVO> findAll() {
+		var personVO = service.findAll();
+		personVO.stream()
+				.forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+		return personVO;
 	}
 
-	@PutMapping(value = "/update",consumes = {"application/json","application/xml"},
-			produces = {"application/json","application/xml"})
-	public PersonVO update(@RequestBody PersonVO person) {
-		return service.update(person);
+	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
+	public PersonVO findById(@PathVariable("id") Long id) {
+		var personVO = service.findById(id);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		return personVO;
 	}
-	
+
+	@PostMapping(value = "/create", consumes = { "application/json", "application/xml",
+			"application/x-yaml" }, produces = { "application/json", "application/xml", "application/x-yaml" })
+	public PersonVO create(@RequestBody PersonVO person) {
+		var personVO = service.create(person);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+		return personVO;
+	}
+
+	@PutMapping(value = "/update", consumes = { "application/json", "application/xml",
+			"application/x-yaml" }, produces = { "application/json", "application/xml", "application/x-yaml" })
+	public PersonVO update(@RequestBody PersonVO person) {
+		var personVO = service.update(person);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+		return personVO;
+	}
+
 	@DeleteMapping(value = "/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-		 service.delete(id);
-		 return ResponseEntity.ok().build();
+		service.delete(id);
+		return ResponseEntity.ok().build();
 	}
 }

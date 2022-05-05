@@ -40,15 +40,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/person/1",
+							"raw": "http://localhost:8080/api/person/v1/1.xml",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
 								"person",
-								"1"
+								"v1",
+								"1.xml"
 							]
 						}
 					},
@@ -60,14 +62,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/person",
+							"raw": "http://localhost:8080/api/person/v1.xml",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"person"
+								"api",
+								"person",
+								"v1.xml"
 							]
 						}
 					},
@@ -80,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 9,\r\n    \"firstName\": \"Lauren\",\r\n    \"lastName\": \"Ribeiro de Souza Vieira\",\r\n    \"address\": \"R. Jair Ballo - Maua - Brasil\",\r\n    \"gender\": \"female\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Gabriel\",\r\n    \"lastName\": \"Luiz de Souza Vieira\",\r\n    \"address\": \"Sao Paulo - Brasil\",\r\n    \"gender\": \"Male\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +113,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 9,\r\n    \"firstName\": \"Lauren\",\r\n    \"lastName\": \"Ribeiro de Souza Vieira\",\r\n    \"address\": \"R. Jair Ballo - Maua - Brasil\",\r\n    \"gender\": \"female\"\r\n}",
+							"raw": "{\r\n        \"id\": 6,\r\n        \"firstName\": \"Fernanda\",\r\n        \"lastName\": \"Isolina\",\r\n        \"address\": \"Maua - Brasil\",\r\n        \"gender\": \"female\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +141,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/person/delete/1",
+							"raw": "http://localhost:8080/person/delete/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,7 +150,330 @@
 							"path": [
 								"person",
 								"delete",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create V2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Nanda\",\r\n    \"lastName\": \"Ribeiro de Souza Vieira\",\r\n    \"address\": \"R. Jair Ballo - Maua - Brasil\",\r\n    \"gender\": \"female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/person/v2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person",
+								"v2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content Negociation via QUERY Parameter",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1/1?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1",
 								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content Negotiation via HEADER Parameter",
+			"item": [
+				{
+					"name": "findAll",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Serializando YAML - YML",
+			"item": [
+				{
+					"name": "findAll",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/x-yaml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/x-yaml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/x-yaml",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-yaml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "---\r\naddress: \"Maua - Brasil\"\r\nfirst_name: \"Lauren\"\r\nlast_name: \"Princesa Pipoca\"\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept": true,
+							"content-type": true,
+							"accept-encoding": true,
+							"host": true,
+							"content-length": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/x-yaml",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-yaml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "---\r\nid: 8\r\naddress: \"SP - Maua - Brasil\"\r\nfirst_name: \"Lauren\"\r\nlast_name: \"Princesa Pipoca\"\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/person/v1/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"person",
+								"v1",
+								"update"
 							]
 						}
 					},
