@@ -16,6 +16,7 @@ public class PersonVO extends ResourceSupport implements Serializable {
 	
 
 	@Mapping("id")
+	@JsonProperty("id")
 	private Long key;
 	
 	@JsonProperty("first_name")
