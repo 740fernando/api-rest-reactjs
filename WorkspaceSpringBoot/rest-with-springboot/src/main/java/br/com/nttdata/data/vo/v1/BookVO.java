@@ -2,6 +2,7 @@ package br.com.nttdata.data.vo.v1;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -52,5 +53,24 @@ public class BookVO extends ResourceSupport implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(author, key, launchDate, price, title);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BookVO other = (BookVO) obj;
+		return Objects.equals(author, other.author) && Objects.equals(key, other.key)
+				&& Objects.equals(launchDate, other.launchDate) && Objects.equals(price, other.price)
+				&& Objects.equals(title, other.title);
+	}
 }
