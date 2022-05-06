@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.nttdata.converter.DozerConverter;
+import br.com.nttdata.data.vo.v1.BookVO;
 import br.com.nttdata.exception.ResourceNotFoundException;
 import br.com.nttdata.model.Book;
 import br.com.nttdata.repository.BookRepository;
@@ -19,24 +21,24 @@ public class BookServiceImpl implements BookService {
 	private BookRepository repository;
 	
 	@Override
-	public List<Book> findAll() {
-		return repository.findAll();
+	public List<BookVO> findAll() {
+		return DozerConverter.parseListObjects(repository.findAll(), BookVO.class);
 	}
 
 	@Override
-	public Book findById(Long Id) {
-		return repository.findById(Id).orElseThrow(()-> new ResourceNotFoundException(NO_RECORDS_FOUND_FOR_THIS_ID));
+	public BookVO findById(Long Id) {
+		return DozerConverter.parseObject(repository.findById(Id).orElseThrow(()-> new ResourceNotFoundException(NO_RECORDS_FOUND_FOR_THIS_ID)), BookVO.class);
 	}
 
 	@Override
-	public Book create(Book book) {
-		return repository.save(book);
+	public BookVO create(BookVO book) {
+		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(book,Book.class)), BookVO.class) ;
 	}
 
 	@Override
-	public Book update(Book book) {
-		findById(book.getId());
-		return repository.save(book);
+	public BookVO update(BookVO book) {
+		findById(book.getKey());
+		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(book,Book.class)), BookVO.class);
 	}
 
 	@Override
