@@ -1,21 +1,40 @@
 package br.com.nttdata.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+@Table(name = "book")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nameBook;
+	
+	@Column(nullable = false, length = 250)
+	private String title;
+	
+	@Column(name = "author", nullable = false, length = 180)
 	private String author;
-	private Integer publicationYear;
+	
+	@Column(name = "launch_date", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date launchDate;
+	
+	@Column(nullable = false)
+	private Double price;
 	
 	public Long getId() {
 		return id;
@@ -23,11 +42,11 @@ public class Book implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNameBook() {
-		return nameBook;
+	public String getTitle() {
+		return title;
 	}
-	public void setNameBook(String nameBook) {
-		this.nameBook = nameBook;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getAuthor() {
 		return author;
@@ -35,15 +54,22 @@ public class Book implements Serializable {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Integer getPublicationYear() {
-		return publicationYear;
+	public Date getLaunchDate() {
+		return launchDate;
 	}
-	public void setPublicationYear(Integer publicationYear) {
-		this.publicationYear = publicationYear;
+	public void setLaunchDate(Date launchDate) {
+		this.launchDate = launchDate;
 	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, id, nameBook, publicationYear);
+		return Objects.hash(author, id, price, launchDate, title);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -55,6 +81,9 @@ public class Book implements Serializable {
 			return false;
 		Book other = (Book) obj;
 		return Objects.equals(author, other.author) && Objects.equals(id, other.id)
-				&& Objects.equals(nameBook, other.nameBook) && Objects.equals(publicationYear, other.publicationYear);
+				&& Objects.equals(price, other.price) && Objects.equals(launchDate, other.launchDate)
+				&& Objects.equals(title, other.title);
 	}
+	
+	
 }
