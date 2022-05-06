@@ -15,12 +15,14 @@ import br.com.nttdata.service.PersonService;
 @Service
 public class PersonServiceImpl implements PersonService {
 	
+	private static final String NO_RECORDS_FOUND_FOR_THIS_ID = "Person - No records found for this ID";
+	
 	@Autowired
 	private PersonRepository repository;
 	
 	@Override
 	public PersonVO findById(Long id) {
-		return DozerConverter.parseObject(repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID")),PersonVO.class);
+		return DozerConverter.parseObject(repository.findById(id).orElseThrow(()-> new ResourceNotFoundException(NO_RECORDS_FOUND_FOR_THIS_ID)),PersonVO.class);
 	}
 
 	@Override
