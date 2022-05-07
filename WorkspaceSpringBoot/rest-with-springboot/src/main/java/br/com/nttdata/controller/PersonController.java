@@ -1,5 +1,8 @@
 package br.com.nttdata.controller;
 
+/**
+ * linkTo && methodOn == import manual
+ */
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -18,7 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nttdata.data.vo.v1.PersonVO;
 import br.com.nttdata.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "Person Endpoint", description = "Description for peerson", tags = {"PersonEndpoint"})
 @RestController
 @RequestMapping(value = "/api/person/v1")
 public class PersonController {
@@ -26,6 +32,7 @@ public class PersonController {
 	@Autowired
 	private PersonService service;
 
+	@ApiOperation(value = "Find all peopale recorded")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll() {
 		var personVO = service.findAll();
