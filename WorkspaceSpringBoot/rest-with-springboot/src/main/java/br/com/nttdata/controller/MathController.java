@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(value = "Math Endpoint", description = "Math API", tags = {"MathEndpoint"})
 @RestController
+@RequestMapping(value = "api/math/v1/")
 public class MathController {
 
 	@Autowired

@@ -41,7 +41,7 @@ public class PersonController {
 		return personVO;
 	}
 	
-	@ApiOperation(value= "Find one person recorded" )
+	@ApiOperation(value= "Find a specific person by your id" )
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {
 		var personVO = service.findById(id);
@@ -49,7 +49,7 @@ public class PersonController {
 		return personVO;
 	}
 	
-	@ApiOperation(value = "Create person" )
+	@ApiOperation(value = "Create new person" )
 	@PostMapping(value = "/create", consumes = { "application/json", "application/xml",
 			"application/x-yaml" }, produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO create(@RequestBody PersonVO person) {
