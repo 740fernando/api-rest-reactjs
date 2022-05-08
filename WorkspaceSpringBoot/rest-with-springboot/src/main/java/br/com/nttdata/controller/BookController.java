@@ -21,7 +21,8 @@ import br.com.nttdata.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value = "Book Endpoint", description = "Description for book", tags = {"BookEndpoint"})
+//@Api(value = "Book Endpoint", description = "Description for book", tags = {"BookEndpoint"})
+@Api(tags = "BookEndpoint")
 @RestController
 @RequestMapping(value = "/api/book/v1")
 public class BookController {
@@ -29,7 +30,7 @@ public class BookController {
 	@Autowired
 	private BookService service;
 	
-	@ApiOperation(value = "Find all persons recorded")
+	@ApiOperation(value = "Find all books recorded")
 	@GetMapping(produces ={"application/json","application/xml","application/x-yaml"})
 	public List<BookVO> findAll(){
 		var bookVO = service.findAll();
