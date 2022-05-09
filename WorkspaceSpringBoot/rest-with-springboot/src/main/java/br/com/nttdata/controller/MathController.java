@@ -1,6 +1,7 @@
 package br.com.nttdata.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import br.com.nttdata.service.MathService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
 @Api(value = "Math Endpoint", description = "Math API", tags = {"MathEndpoint"})
 @RestController
 @RequestMapping(value = "api/math/v1/")
