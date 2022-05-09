@@ -42,7 +42,7 @@ public class PersonController {
 		return personVO;
 	}
 
-	@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
+//	@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
 	@ApiOperation(value= "Find a specific person by your id" )
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {
