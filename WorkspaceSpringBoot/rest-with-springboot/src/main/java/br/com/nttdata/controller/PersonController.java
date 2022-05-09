@@ -40,7 +40,8 @@ public class PersonController {
 				.forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
 		return personVO;
 	}
-	
+
+//	@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
 	@ApiOperation(value= "Find a specific person by your id" )
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {

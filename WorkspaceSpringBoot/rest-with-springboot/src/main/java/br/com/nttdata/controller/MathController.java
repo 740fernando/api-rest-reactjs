@@ -10,6 +10,7 @@ import br.com.nttdata.service.MathService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+//@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
 @Api(value = "Math Endpoint", description = "Math API", tags = {"MathEndpoint"})
 @RestController
 @RequestMapping(value = "api/math/v1/")
