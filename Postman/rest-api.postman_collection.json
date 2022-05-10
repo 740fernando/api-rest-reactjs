@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7d4b83fd-c6d6-4179-934e-c74f73fe9305",
+		"_postman_id": "e21a2881-9fa1-404b-a80f-7d3a4f166e45",
 		"name": "Restful API with Spring Boot",
 		"description": "Some description about your API\n\nContact Support:\n Name: Fernando Luiz\n Email: your_email@gmail.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -20,6 +20,11 @@
 									{
 										"key": "Accept",
 										"value": "application/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZWFuZHJvIiwicm9sZXMiOltdLCJpYXQiOjE2NTIyMTI1NjYsImV4cCI6MTY1MjIxNjE2Nn0.s8wCRON1DGeM3eKMokc0Gv7dsplqpSc1_oUN_noNn78",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -3042,6 +3047,59 @@
 									"body": ""
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "login/v1",
+					"item": [
+						{
+							"name": "signin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if(responseCode.code>= 200 && responseCode.code <= 299){\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    postman.setEnvironmentVariable('bearer_token', jsonData.token);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"{{user}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/v1/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"v1",
+										"signin"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
