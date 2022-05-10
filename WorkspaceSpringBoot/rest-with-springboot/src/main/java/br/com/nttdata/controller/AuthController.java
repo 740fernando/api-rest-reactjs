@@ -23,7 +23,7 @@ import br.com.nttdata.security.jwt.JwtTokenProvider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "AuthEndpoint")
+@Api(tags = "AuthenticationEndpoint")
 @RestController
 @RequestMapping("/api/auth/v1")
 public class AuthController {

@@ -2,6 +2,8 @@ package br.com.nttdata.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,10 @@ public class PersonServiceImpl implements PersonService {
 		repository.deleteById(findById(id).getKey());
 	}
 
-
+	@Transactional
+	@Override
+	public PersonVO disablePersons(Long id) {
+		repository.disablePerson(id);
+		return findById(id);
+	}
 }
