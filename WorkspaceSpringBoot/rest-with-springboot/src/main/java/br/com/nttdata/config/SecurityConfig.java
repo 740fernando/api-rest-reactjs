@@ -30,9 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic().disable().csrf().disable().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/auth/signin", "/api-docs/**", "swagger-ui.html**").permitAll().antMatchers("/users")
-				.denyAll().and().apply(new JwtConfigurer(tokenProvider));
+		http.httpBasic().disable().
+			csrf().disable()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+				.antMatchers("/api/auth/v1/signin", "/api-docs/**", "swagger-ui.html**").permitAll()
+				.antMatchers("/api/**").authenticated()
+				.antMatchers("/users").denyAll()
+				.and()
+				.apply(new JwtConfigurer(tokenProvider));
 	}
 }

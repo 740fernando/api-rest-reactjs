@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import br.com.nttdata.exception.InvalidJwtAuthenticationException;
 import io.jsonwebtoken.Claims;
@@ -34,10 +39,10 @@ public class JwtTokenProvider {
 
 	private static final String BEARER = "Bearer ";
 
-	@Value("$security.jwt.token.secret-key:secret")
+	@Value("${security.jwt.token.secret-key:secret}")
 	private String secretKey = "secret";
 	
-	@Value("${security.jwt.token.expire-lenght:3600000")
+	@Value("${security.jwt.token.expire-length:3600000}")
 	private long validityInMilliseconds = 3600000; //== one hour
 	
 	@Autowired
@@ -72,9 +77,12 @@ public class JwtTokenProvider {
 		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
 	}
 	
-	public String resolveToken(HttpServletRequest req) {
-		String bearerToken = req.getHeader(AUTHORIZATION);
-		return (!(bearerToken.equals(null)) && bearerToken.startsWith(BEARER))? bearerToken.substring(7, bearerToken.length()) :null ;
+	public String resolveToken(HttpServletRequest req)  {
+			String bearerToken = req.getHeader(AUTHORIZATION);
+			if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+				return bearerToken.substring(7, bearerToken.length());
+			}		
+			return null;
 	}
 	
 	public boolean validateToken(String token) {
