@@ -11,4 +11,5 @@ public interface PersonService {
 	PersonVO create(PersonVO person);
 	PersonVO update(PersonVO person);
 	void delete(Long id);
+	PersonVO disablePersons(Long id);
 }
