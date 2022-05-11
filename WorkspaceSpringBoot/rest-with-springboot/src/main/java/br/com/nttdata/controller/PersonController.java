@@ -56,6 +56,24 @@ public class PersonController {
 				.forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
 		return new ResponseEntity<>(assembler.toResource(persons), HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "Find person by name")
+	@GetMapping(value = {"/findPersonByName/{firstName}" } ,produces = {"application/json","application/xml","application/x-yaml"})
+	public ResponseEntity<PagedResources<PersonVO>> findPersonByName(
+				@PathVariable("firstName")String firstName,
+				@RequestParam(value = "page")int page,
+				@RequestParam(value = "limit")int limit,
+				@RequestParam(value = "direction", defaultValue = "asc")String direction,
+				PagedResourcesAssembler assembler){
+		
+		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
+		Pageable pageable = PageRequest.of(page, limit,Sort.by(sortDirection,"firstName"));
+		var persons = service.findPersonByName(firstName, pageable);
+		persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+		
+		return new ResponseEntity(assembler.toResource(persons),HttpStatus.OK);
+	}
+	
 
 //	@CrossOrigin(origins = {"http://locahost:8080","www.google.com.br"})
 	@ApiOperation(value= "Find a specific person by your id" )
