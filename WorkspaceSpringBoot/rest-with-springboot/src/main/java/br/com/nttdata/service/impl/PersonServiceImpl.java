@@ -33,6 +33,11 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	@Override
+	public Page<PersonVO> findPersonByName(String firstName, Pageable pageable) {
+		return repository.findPersonName(firstName, pageable).map(this :: convertToPersonVO);
+	}
+	
+	@Override
 	public PersonVO create(PersonVO person) {
 		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
 	}
@@ -58,4 +63,6 @@ public class PersonServiceImpl implements PersonService {
 	private PersonVO convertToPersonVO(Person entity) {
 		return DozerConverter.parseObject(entity, PersonVO.class);
 	}
+
+
 }

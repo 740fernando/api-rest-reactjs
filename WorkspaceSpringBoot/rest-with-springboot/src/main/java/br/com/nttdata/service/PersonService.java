@@ -9,6 +9,7 @@ public interface PersonService {
 	
 	PersonVO findById(Long id);
 	Page<PersonVO> findAll(Pageable pageable);
+	Page<PersonVO> findPersonByName(String firstName, Pageable pageable);
 	PersonVO create(PersonVO person);
 	PersonVO update(PersonVO person);
 	void delete(Long id);
