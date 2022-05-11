@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.nttdata.converter.DozerConverter;
@@ -28,8 +29,8 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<PersonVO> findAll() {
-		return DozerConverter.parseListObjects(repository.findAll(),PersonVO.class);
+	public List<PersonVO> findAll(Pageable pageable) {
+		return DozerConverter.parseListObjects(repository.findAll(pageable).getContent(),PersonVO.class);
 	}
 
 	@Override
