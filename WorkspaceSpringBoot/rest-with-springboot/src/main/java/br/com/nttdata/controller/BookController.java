@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,13 +35,15 @@ public class BookController {
 	@Autowired
 	private BookService service;
 	
+	@Autowired
+	private PagedResourcesAssembler<BookVO> assembler;
+	
 	@ApiOperation(value = "Find all books recorded")
 	@GetMapping(produces ={"application/json","application/xml","application/x-yaml"})
-	public ResponseEntity<PagedResources<BookVO>> findAll(
+	public ResponseEntity<?> findAll(
 			@RequestParam(value = "page", defaultValue = "0")int page,
 			@RequestParam(value = "limit", defaultValue = "12")int limit,
-			@RequestParam(value = "direction", defaultValue = "asc")String direction,
-			PagedResourcesAssembler assembler){
+			@RequestParam(value = "direction", defaultValue = "asc")String direction){
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC :Direction.ASC;	
 		
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection,"author"));
@@ -51,7 +52,26 @@ public class BookController {
 		
 		books.stream().forEach(b-> b.add(linkTo(methodOn(BookController.class).findById(b.getKey())).withSelfRel()));
 		
-		return new ResponseEntity(assembler.toResource(books), HttpStatus.OK);
+		return new ResponseEntity<>(assembler.toResource(books), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Find book using author with params")
+	@GetMapping(value = "findByAuthor/{author}",produces = {"application/json","application/xml","application/x-yaml"})
+	public ResponseEntity<?> findByAuthor(
+			@PathVariable(value = "author")String author,
+			@RequestParam(value = "page")int page,
+			@RequestParam(value = "limit")int limit,
+			@RequestParam(value = "direction")String direction){
+			
+		var sortDirection = "desc".equalsIgnoreCase(direction)? Direction.DESC : Direction.ASC;
+		
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection,"author"));
+		
+		var books = service.findByAuthor(author, pageable);
+		
+		books.stream().forEach(b -> b.add(linkTo(methodOn(BookController.class).findById(b.getKey())).withSelfRel()));
+		
+		return new ResponseEntity<>(assembler.toResource(books), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value= "Find one book recorded" )

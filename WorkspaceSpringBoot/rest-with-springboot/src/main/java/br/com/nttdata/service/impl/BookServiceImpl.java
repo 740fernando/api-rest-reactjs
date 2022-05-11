@@ -9,6 +9,7 @@ import br.com.nttdata.converter.DozerConverter;
 import br.com.nttdata.data.vo.v1.BookVO;
 import br.com.nttdata.exception.ResourceNotFoundException;
 import br.com.nttdata.model.Book;
+import br.com.nttdata.model.Person;
 import br.com.nttdata.repository.BookRepository;
 import br.com.nttdata.service.BookService;
 
@@ -25,6 +26,11 @@ public class BookServiceImpl implements BookService {
 		return repository.findAll(pageable).map(this :: converterToBookVO);
 	}
 	
+	@Override
+	public Page<BookVO> findByAuthor(String author, Pageable pageable) {
+		return repository.findByAuthor(author, pageable).map(this :: converterToBookVO);
+	}
+
 	@Override
 	public BookVO findById(Long Id) {
 		return DozerConverter.parseObject(repository.findById(Id).orElseThrow(()-> new ResourceNotFoundException(NO_RECORDS_FOUND_FOR_THIS_ID)), BookVO.class);
@@ -52,5 +58,4 @@ public class BookServiceImpl implements BookService {
 	private BookVO converterToBookVO(Book book) {
 		return DozerConverter.parseObject(book, BookVO.class);
 	}
-
 }
