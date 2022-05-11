@@ -1,8 +1,8 @@
 package br.com.nttdata.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.nttdata.converter.DozerConverter;
@@ -21,10 +21,10 @@ public class BookServiceImpl implements BookService {
 	private BookRepository repository;
 	
 	@Override
-	public List<BookVO> findAll() {
-		return DozerConverter.parseListObjects(repository.findAll(), BookVO.class);
+	public Page<BookVO> findAll(Pageable pageable) {
+		return repository.findAll(pageable).map(this :: converterToBookVO);
 	}
-
+	
 	@Override
 	public BookVO findById(Long Id) {
 		return DozerConverter.parseObject(repository.findById(Id).orElseThrow(()-> new ResourceNotFoundException(NO_RECORDS_FOUND_FOR_THIS_ID)), BookVO.class);
@@ -45,6 +45,12 @@ public class BookServiceImpl implements BookService {
 	public void delete(Long Id) {
 		findById(Id);
 		repository.deleteById(Id);
+	}
+
+
+
+	private BookVO converterToBookVO(Book book) {
+		return DozerConverter.parseObject(book, BookVO.class);
 	}
 
 }
