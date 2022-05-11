@@ -1,10 +1,9 @@
 package br.com.nttdata.service.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +28,10 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<PersonVO> findAll(Pageable pageable) {
-		return DozerConverter.parseListObjects(repository.findAll(pageable).getContent(),PersonVO.class);
+	public Page<PersonVO> findAll(Pageable pageable) {
+		return repository.findAll(pageable).map(this :: convertToPersonVO) ;
 	}
-
+	
 	@Override
 	public PersonVO create(PersonVO person) {
 		return DozerConverter.parseObject(repository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
@@ -54,5 +53,9 @@ public class PersonServiceImpl implements PersonService {
 	public PersonVO disablePersons(Long id) {
 		repository.disablePerson(id);
 		return findById(id);
+	}
+	
+	private PersonVO convertToPersonVO(Person entity) {
+		return DozerConverter.parseObject(entity, PersonVO.class);
 	}
 }
