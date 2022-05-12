@@ -28,6 +28,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 		}
 	}
 	
+	@Override
 	public String storeFile(MultipartFile file) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		
