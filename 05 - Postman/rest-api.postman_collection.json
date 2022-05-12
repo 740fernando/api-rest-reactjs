@@ -3442,6 +3442,174 @@
 									"body": ""
 								}
 							]
+						},
+						{
+							"name": "Upload Multiple File",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept-encoding": true,
+									"accept": true,
+									"user-agent": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{content_accept}}"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{bearer_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "files",
+											"type": "file",
+											"src": [
+												"/C:/Users/fsouviei/Downloads/Java_se_8_programmer_i_o_guia_para_sua_c (1).pdf",
+												"/C:/Users/fsouviei/Downloads/0902+Value+Object+(VO)+Design+Pattern.txt",
+												"/C:/Users/fsouviei/Downloads/00+RestWithSpringBootUdemy+Spring+Initializr.zip"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/file/v1/uploadMultipleFiles",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"file",
+										"v1",
+										"uploadMultipleFiles"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/person/v1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"person",
+												"v1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"address\": \"eu labore dolore\",\n    \"first_name\": \"fugiat laborum Duis dolor\",\n    \"gender\": \"aliquip mollit\",\n    \"id\": -58255573,\n    \"last_name\": \"labore ea irure Ut\",\n    \"links\": [\n      {\n        \"deprecation\": \"adipisicing non amet officia\",\n        \"href\": \"laborum labore\",\n        \"hreflang\": \"dolor\",\n        \"media\": \"id in est aute\",\n        \"rel\": \"et ut\",\n        \"templated\": false,\n        \"title\": \"Excepteur id\",\n        \"type\": \"magna ullamco dolor consectetur do\"\n      },\n      {\n        \"deprecation\": \"commodo sunt voluptate ea\",\n        \"href\": \"culpa non nulla magna\",\n        \"hreflang\": \"exercitation ad Duis voluptate\",\n        \"media\": \"exercitation minim ad\",\n        \"rel\": \"voluptate\",\n        \"templated\": false,\n        \"title\": \"nostrud ipsum sunt\",\n        \"type\": \"sint reprehenderit sed\"\n      }\n    ]\n  },\n  {\n    \"address\": \"est elit sunt tempor sed\",\n    \"first_name\": \"culpa est\",\n    \"gender\": \"veniam aliquip in in et\",\n    \"id\": -45547118,\n    \"last_name\": \"culpa minim\",\n    \"links\": [\n      {\n        \"deprecation\": \"cupidatat culpa fugiat est\",\n        \"href\": \"exercitation cillum te\",\n        \"hreflang\": \"eiusmod\",\n        \"media\": \"d\",\n        \"rel\": \"reprehenderit consequat ea pariatur laborum\",\n        \"templated\": false,\n        \"title\": \"qui esse laborum id\",\n        \"type\": \"consequat commodo esse\"\n      },\n      {\n        \"deprecation\": \"aliqua ad\",\n        \"href\": \"aliquip Ut laboris veniam pa\",\n        \"hreflang\": \"aute sit commodo enim\",\n        \"media\": \"nulla\",\n        \"rel\": \"deserunt aliqua irure nostrud\",\n        \"templated\": true,\n        \"title\": \"magna minim\",\n        \"type\": \"et Lorem\"\n      }\n    ]\n  }\n]"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/person/v1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"person",
+												"v1"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/person/v1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"person",
+												"v1"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/person/v1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"person",
+												"v1"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
 						}
 					]
 				},
