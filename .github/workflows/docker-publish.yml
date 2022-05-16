@@ -23,7 +23,7 @@ jobs:
           cache: maven
       
       - name: Build REST with Spring Boot Jar
-        working-directory: ./rest-with-springboot
+        working-directory: /rest-with-springboot
         run: mvn clean package
  
       - name: Docker Build
