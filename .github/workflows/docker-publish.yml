@@ -23,11 +23,11 @@ jobs:
           cache: maven
       
       - name: Build REST with Spring Boot Jar
-       
+        working-directory: ./WorkspaceSpringBoot
         run: mvn clean package
  
       - name: Docker Build
-        working-directory: ./rest-with-springboot
+        working-directory: ./WorkspaceSpringBoot
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/rest-with-springboot:${{github.run_id}} .
  
       - name: Push to Docker Hub Container Registry
