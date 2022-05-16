@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import br.com.nttdata.data.vo.v1.BookVO;
-import br.com.nttdata.model.Person;
 
 public interface BookService {
 	
