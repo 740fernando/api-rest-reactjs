@@ -46,9 +46,8 @@
 
 				<!-- Permite realizar a comunicação entre app e o bd obs - nao foi colocado  -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.18</version>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
 		</dependency>
 
 		<!-- Permite o versionamento do bd -->
@@ -125,9 +124,9 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:mysql://localhost:5432/rest_with_spring_boot</url>
-					<user>root</user>
-					<password>root</password>
+					<url>jdbc:sqlserver://localhost;databaseName=rest_with_spring_boot</url>
+					<user>sa</user>
+					<password>admin123!</password>
 				</configuration>
 				<dependencies>
 					<dependency>
