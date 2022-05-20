@@ -1,5 +1,5 @@
 -- CREATE DATABASE `rest_with_spring_boot_udemy`;
-USE [rest_with_spring_boot_udemy]
+USE [rest_with_spring_boot]
 GO
 
 CREATE TABLE dbo.books (
