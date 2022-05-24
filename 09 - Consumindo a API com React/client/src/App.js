@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import Header from './Header';
+import './global.css';
+
+import Login from './pages/Login';
 
 export default function App() {
-  return (
-    <Header>
-      Client REST - Properties
-    </Header>
+    return(
+      <Login/>
     );
 }
