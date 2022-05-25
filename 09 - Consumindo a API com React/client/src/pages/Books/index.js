@@ -6,7 +6,7 @@ import './styles.css';
 
 import logo from '../../assets/dragon.svg'
 
-export default function Book(){
+export default function Books(){
     return (
         <div className='book-container'>
             <header>
