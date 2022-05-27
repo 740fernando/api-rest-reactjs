@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Books from './pages/Books';
 import NewBook from './pages/NewBook';
 
-export default function App(){
+export default function Routes(){
     return (
         <BrowserRouter>
             <Switch>
