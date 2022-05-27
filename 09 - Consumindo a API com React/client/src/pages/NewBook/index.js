@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, Link} from "react-router-dom";
+import { useHistory, Link, useParams} from "react-router-dom";
 import {FiArrowLeft} from 'react-icons/fi';
 
 import './styles.css';
@@ -15,6 +15,8 @@ export default function NewBook(){
     const [launchDate, setLaunchDate] = useState('');
     const [price, setPrice] = useState('');
     const [title, setTitle] = useState('');
+
+    const {bookId} = useParams();
 
     const username =localStorage.getItem('username');
     const accessToken =localStorage.getItem('accessToken');
@@ -57,7 +59,7 @@ export default function NewBook(){
                 <section className="form">
                     <img src={logo} alt="Ntt"/>
                     <h1>Add New Book</h1>
-                    <p>Enter the book information and click 'Add' !</p>
+                    <p>Enter the book information and click 'Add' ! ### {bookId}</p>
                     <Link className="back-link" to="/books">
                         <FiArrowLeft size={16} color="#251fc5" />
                         Home
