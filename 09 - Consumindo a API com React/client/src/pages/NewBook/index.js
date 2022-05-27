@@ -46,9 +46,9 @@ export default function NewBook(){
     useEffect(() => {
         if (bookId === '0') return;
         else loadBook();
-    })
+    },[bookId])
 
-    async function createNewBook(e){
+    async function saveOrUpdate(e){
         e.preventDefault();
 
         const data = 
@@ -66,11 +66,20 @@ export default function NewBook(){
 
         try
         {
-           await api.post('api/book/v1', data, {
-               headers:{
-                   Authorization: `Bearer ${accessToken}`
-               }
-           });
+            if(bookId === '0'){
+                await api.post('api/book/v1', data, {
+                    headers:{
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+            }else{
+                data.id = id
+                await api.put('api/book/v1', data, {
+                    headers:{
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+            }        
            history.push('/books');
         }catch(err){
             alert('Error whle recording Book! Try again!')
@@ -83,14 +92,14 @@ export default function NewBook(){
             <div className="content">
                 <section className="form">
                     <img src={logo} alt="Ntt"/>
-                    <h1>Add New Book</h1>
-                    <p>Enter the book information and click 'Add' ! ### {bookId}</p>
+                    <h1>{bookId === '0' ? 'Add New' : 'Update'} Book</h1>
+                    <p>Enter the book information and click on {bookId === '0' ? "'Add'" : "'Update'"} !</p>
                     <Link className="back-link" to="/books">
                         <FiArrowLeft size={16} color="#251fc5" />
-                        Home
+                        Back to Book List
                     </Link>
                 </section>
-                <form onSubmit={createNewBook}>
+                <form onSubmit={saveOrUpdate}>
                     <input 
                         placeholder="Title"
                         value={title}
@@ -112,7 +121,7 @@ export default function NewBook(){
                         onChange={e => setPrice(e.target.value)}
                      />
 
-                    <button className="button" type="submit">Add</button>
+                    <button className="button" type="submit">{bookId === '0'? 'Add' : 'Update'}</button>
                 </form>
             </div>
         </div>
