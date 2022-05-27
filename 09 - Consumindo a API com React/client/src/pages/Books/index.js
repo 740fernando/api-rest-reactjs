@@ -11,6 +11,7 @@ import logo from '../../assets/dragon.svg'
 export default function Books(){
 
     const [books, setBooks] = useState([]);
+    const [page, setPage] = useState([]);
 
     const username =localStorage.getItem('username');
     const accessToken =localStorage.getItem('accessToken');
@@ -43,20 +44,25 @@ export default function Books(){
         }
     }
 
-    useEffect(()=>{
-        api.get("api/book/v1",{
-            headers:{
+    async function fetchMoreBooks(){
+        const response = await api.get('api/book/v1',{
+            headers: {
                 Authorization: `Bearer ${accessToken}`
             },
             params: {
-                page: 1,
+                page: page,
                 limit: 4,
                 direction: 'asc'
             }
-        }).then(response =>{
-            setBooks(response.data._embedded.bookVoes)
-        })
-    })
+        });
+
+        setBooks([...books,...response.data._embedded.bookVoes])
+        setPage(page+1);
+    }
+
+    useEffect(()=>{
+       fetchMoreBooks();
+    }, [])
 
     return (
         <div className='book-container'>
@@ -93,6 +99,8 @@ export default function Books(){
 
                ))}
             </ul>
+
+            <button className='button' onClick={fetchMoreBooks} type="button">Load More</button>
         </div>
     )
 }
