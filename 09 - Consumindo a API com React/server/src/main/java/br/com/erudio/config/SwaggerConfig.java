@@ -33,7 +33,7 @@ public class SwaggerConfig {
 				"Some description about your API.",
 				"v1",
 				"Terms Of Service Url",
-				new Contact("Leandro Costa", "www.erudio.com.br", "your_email@gmail.com"),
+				new Contact("Fernando Luiz", "www.erudio.com.br", "your_email@gmail.com"),
 				"License of API", "License of URL", Collections.emptyList());
 	}
 }
